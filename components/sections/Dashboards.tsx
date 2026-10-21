@@ -1,11 +1,11 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { Info } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { formatCurrency, formatNumber, seeded } from '@/lib/i18n';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { ExternalLink, Info, Maximize2, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { asset, formatCurrency, formatNumber, seeded } from '@/lib/i18n';
 import { useSite } from '../providers';
-import { Section } from '../ui/Section';
+import { Reveal, Section } from '../ui/Section';
 import { Tabs } from '../ui/Tabs';
 
 // ---------- dados fictícios (determinísticos) ----------
@@ -407,17 +407,140 @@ function GoalThermometer() {
   );
 }
 
+// ---------- Galeria de prints reais (desfocados) ----------
+type ShotKey = 'sales' | 'stock' | 'tracking' | 'goal' | 'budget' | 'abc';
+
+// Imagens em public/dashboards/, geradas a partir de assets/raw/ com nomes e valores desfocados.
+const SHOTS: { key: ShotKey; file: string; width: number; height: number }[] = [
+  { key: 'sales', file: 'vida-do-pedido.webp', width: 1609, height: 815 },
+  { key: 'stock', file: 'pedidos-estoque.webp', width: 1619, height: 817 },
+  { key: 'budget', file: 'orcado-realizado.webp', width: 1643, height: 754 },
+  { key: 'goal', file: 'termometro-metas.webp', width: 972, height: 718 },
+  { key: 'tracking', file: 'acompanhamento-estoque.webp', width: 503, height: 413 },
+  { key: 'abc', file: 'curva-abc.webp', width: 825, height: 276 },
+];
+
+function Gallery() {
+  const { t } = useSite();
+  const g = t.dashboards.gallery;
+  const [open, setOpen] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (open === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(null);
+      if (e.key === 'ArrowRight') setOpen((o) => (o === null ? o : (o + 1) % SHOTS.length));
+      if (e.key === 'ArrowLeft') setOpen((o) => (o === null ? o : (o - 1 + SHOTS.length) % SHOTS.length));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const current = open !== null ? SHOTS[open] : null;
+  const src = (file: string) => asset(`/dashboards/${file}`);
+
+  return (
+    <div className="mb-16">
+      <h3 className="font-display text-2xl font-bold">{g.title}</h3>
+      <p className="mb-6 mt-1 text-sm text-muted">{g.note}</p>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {SHOTS.map((shot, i) => (
+          <Reveal key={shot.key} delay={Math.min(i * 0.05, 0.25)} className={i === 0 ? 'md:col-span-2 lg:col-span-3' : ''}>
+            <figure className="group h-full overflow-hidden rounded-2xl border border-line bg-surface">
+              <button
+                type="button"
+                onClick={() => setOpen(i)}
+                aria-label={`${g.captions[shot.key]} — ${g.open}`}
+                className="relative block w-full overflow-hidden bg-white"
+              >
+                <img
+                  src={src(shot.file)}
+                  alt={g.captions[shot.key]}
+                  width={shot.width}
+                  height={shot.height}
+                  loading="lazy"
+                  decoding="async"
+                  className={`w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] ${
+                    i === 0 ? 'aspect-[2/1]' : 'aspect-[16/10]'
+                  }`}
+                />
+                <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-bg/80 text-fg opacity-0 transition-opacity group-hover:opacity-100">
+                  <Maximize2 className="h-4 w-4" aria-hidden="true" />
+                </span>
+              </button>
+              <figcaption className="border-t border-line px-4 py-3 text-sm">{g.captions[shot.key]}</figcaption>
+            </figure>
+          </Reveal>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {current && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={g.captions[current.key]}
+            className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-3 bg-black/85 p-4 backdrop-blur"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(null)}
+          >
+            <div className="flex w-full max-w-6xl items-center justify-between gap-3 text-sm text-white">
+              <span>{g.captions[current.key]}</span>
+              <span className="flex shrink-0 items-center gap-2">
+                <a
+                  href={src(current.file)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+                  aria-label={g.open}
+                >
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setOpen(null)}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+                  aria-label={t.common.collapse}
+                  autoFocus
+                >
+                  <X className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </span>
+            </div>
+            <motion.img
+              key={current.file}
+              src={src(current.file)}
+              alt={g.captions[current.key]}
+              width={current.width}
+              height={current.height}
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="h-auto max-h-[82vh] w-auto max-w-full rounded-xl bg-white object-contain shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function Dashboards() {
   const { t } = useSite();
   const d = t.dashboards;
   return (
     <Section id="dashboards" index="07" title={d.title} subtitle={d.subtitle} focus="gestor">
-      <p className="-mt-6 mb-8 inline-flex items-center gap-2 rounded-full border border-warn/40 bg-warn/10 px-3 py-1 text-xs text-warn">
+      <Gallery />
+      <h3 className="font-display text-2xl font-bold">{d.gallery.demoTitle}</h3>
+      <p className="mb-6 mt-2 inline-flex items-center gap-2 rounded-full border border-warn/40 bg-warn/10 px-3 py-1 text-xs text-warn">
         <Info className="h-3.5 w-3.5" aria-hidden="true" /> {d.disclaimer}
       </p>
       <div className="rounded-3xl border border-line bg-surface/60 p-4 sm:p-6">
         <Tabs
-          label={d.title}
+          label={d.gallery.demoTitle}
           items={[
             { key: 'kanban', label: d.tabs.kanban, content: <Kanban /> },
             { key: 'stock', label: d.tabs.stock, content: <StockOrders /> },

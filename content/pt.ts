@@ -2,6 +2,7 @@ import type { Content } from './types';
 import { site } from './site';
 
 const yearsAtCpe = new Date().getFullYear() - site.cpeSince;
+const yearsLeading = new Date().getFullYear() - site.leadershipSince;
 
 export const pt: Content = {
   meta: {
@@ -62,7 +63,7 @@ export const pt: Content = {
       gestor: [
         { value: 7, label: 'áreas sob gestão' },
         { value: yearsAtCpe, label: 'anos de CPE Tecnologia' },
-        { value: 33, label: 'equipes na competição de IA' },
+        { value: 70, label: 'pessoas lideradas' },
       ],
       hic: [
         { value: 100, suffix: '+', label: 'procedures, triggers e relatórios' },
@@ -177,6 +178,9 @@ export const pt: Content = {
         { icon: 'cloud', title: 'CRM Salesforce', desc: 'Implantação e customização do CRM comercial.' },
         { icon: 'landmark', title: 'Remessas bancárias', desc: 'Automatização do envio e retorno de boletos.' },
         { icon: 'server', title: 'Virtualização', desc: 'Virtualização dos servidores da empresa.' },
+        { icon: 'phone', title: 'Vivo Voz Negócio', desc: 'Implantação da telefonia corporativa em nuvem.' },
+        { icon: 'mail', title: 'Google Workspace', desc: 'E-mail, agenda e documentos corporativos.' },
+        { icon: 'message', title: 'Discord para empresas', desc: 'Comunicação interna das equipes.' },
         { icon: 'chart', title: 'Dashboards e BI', desc: 'Painéis para gestão à vista.' },
       ],
       impact:
@@ -222,13 +226,13 @@ export const pt: Content = {
       { icon: 'clipboard', title: 'Processo documentado antes de escalar', desc: 'POP, IT e fluxo mapeado antes de crescer o volume.' },
     ],
     metricsTitle: 'Métricas de gestão',
-    metricsNote: 'Valores marcados com "—" ainda serão preenchidos.',
+    metricsNote: 'Sistemas implantados: Sankhya W/OM, Salesforce, Vivo Voz Negócio, Google Workspace e Discord para empresas.',
     metrics: [
-      { value: null, label: 'anos de liderança' }, // TODO
+      { value: yearsLeading, label: 'anos de liderança (desde 2019)' },
       { value: 7, label: 'áreas sob gestão' },
-      { value: null, label: 'pessoas lideradas' }, // TODO
-      { value: null, label: 'sistemas implantados' }, // TODO
-      { value: null, suffix: 'h', label: 'horas economizadas com automação' }, // TODO
+      { value: 70, label: 'pessoas lideradas' },
+      { value: 5, label: 'sistemas implantados' },
+      { value: 10, suffix: 'h+', label: 'economizadas por atividade com as 5 Skills de IA' },
     ],
   },
   sankhya: {
@@ -426,7 +430,7 @@ export const pt: Content = {
   },
   dashboards: {
     title: 'Gestão à vista',
-    subtitle: 'Painéis que uso na operação, recriados como componentes interativos.',
+    subtitle: 'Painéis que desenvolvi e uso no dia a dia da operação.',
     disclaimer: 'Dados fictícios: nomes e valores inventados. A estrutura reproduz os painéis reais.',
     client: 'Cliente',
     tabs: { kanban: 'Vida do Pedido', stock: 'Pedidos — Estoque', abc: 'Curva ABC', budget: 'Orçado x Realizado', goal: 'Termômetro de metas' },
@@ -455,6 +459,20 @@ export const pt: Content = {
       variance: 'Variação',
     },
     goal: { title: 'Termômetro de metas de faturamento', goal: 'Meta do mês', achieved: 'Realizado', remaining: 'Falta', daysLeft: 'dias úteis restantes', simulate: 'Simular avanço do mês' },
+    gallery: {
+      title: 'Painéis em produção',
+      note: 'Capturas reais dos painéis que desenvolvi. Nomes de clientes e valores foram desfocados.',
+      demoTitle: 'Versão interativa (dados fictícios)',
+      open: 'Abrir imagem em tamanho real',
+      captions: {
+        sales: '#BoraVender — funil de pedidos de venda por fase, com urgências e pontos de atenção',
+        stock: 'Pedidos de Venda — Estoque: separação, conferência e expedição',
+        tracking: 'Acompanhamento de pedidos do estoque, ao vivo',
+        goal: 'Termômetro de metas de faturamento (Meta 1 a Ultra Meta)',
+        budget: 'Orçamento de Operações — Orçado x Realizado mensal e acumulado',
+        abc: 'Curva ABC de clientes — três visões',
+      },
+    },
   },
   thesis: {
     title: 'TCC — Algoritmo de trade',

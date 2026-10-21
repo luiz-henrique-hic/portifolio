@@ -2,6 +2,7 @@ import type { Content } from './types';
 import { site } from './site';
 
 const yearsAtCpe = new Date().getFullYear() - site.cpeSince;
+const yearsLeading = new Date().getFullYear() - site.leadershipSince;
 
 export const en: Content = {
   meta: {
@@ -62,7 +63,7 @@ export const en: Content = {
       gestor: [
         { value: 7, label: 'areas under management' },
         { value: yearsAtCpe, label: 'years at CPE Tecnologia' },
-        { value: 33, label: 'teams in the AI competition' },
+        { value: 70, label: 'people led' },
       ],
       hic: [
         { value: 100, suffix: '+', label: 'procedures, triggers and reports' },
@@ -176,6 +177,9 @@ export const en: Content = {
         { icon: 'cloud', title: 'Salesforce CRM', desc: 'Sales CRM rollout and customization.' },
         { icon: 'landmark', title: 'Bank remittances', desc: 'Automated sending and return of bank slips (boletos).' },
         { icon: 'server', title: 'Virtualization', desc: 'Virtualized the company servers.' },
+        { icon: 'phone', title: 'Vivo Voz Negócio', desc: 'Cloud corporate telephony rollout.' },
+        { icon: 'mail', title: 'Google Workspace', desc: 'Corporate e-mail, calendar and documents.' },
+        { icon: 'message', title: 'Discord for business', desc: 'Internal team communication.' },
         { icon: 'chart', title: 'Dashboards & BI', desc: 'Visual management dashboards.' },
       ],
       impact: 'Core systems (ERP and CRM) live and embedded in daily work, consolidated infrastructure and automated finance processes.',
@@ -218,13 +222,13 @@ export const en: Content = {
       { icon: 'clipboard', title: 'Document before scaling', desc: 'SOPs, work instructions and mapped flows before volume grows.' },
     ],
     metricsTitle: 'Management metrics',
-    metricsNote: 'Values shown as "—" are still to be filled in.',
+    metricsNote: 'Systems rolled out: Sankhya W/OM, Salesforce, Vivo Voz Negócio, Google Workspace and Discord for business.',
     metrics: [
-      { value: null, label: 'years in leadership' }, // TODO
+      { value: yearsLeading, label: 'years in leadership (since 2019)' },
       { value: 7, label: 'areas under management' },
-      { value: null, label: 'people led' }, // TODO
-      { value: null, label: 'systems rolled out' }, // TODO
-      { value: null, suffix: 'h', label: 'hours saved through automation' }, // TODO
+      { value: 70, label: 'people led' },
+      { value: 5, label: 'systems rolled out' },
+      { value: 10, suffix: 'h+', label: 'saved per task with the 5 AI Skills' },
     ],
   },
   sankhya: {
@@ -422,7 +426,7 @@ export const en: Content = {
   },
   dashboards: {
     title: 'Visual management',
-    subtitle: 'Dashboards I use in operations, rebuilt as interactive components.',
+    subtitle: 'Dashboards I built and use in day-to-day operations.',
     disclaimer: 'Fictitious data: names and values are made up. The structure mirrors the real dashboards.',
     client: 'Client',
     tabs: { kanban: 'Order lifecycle', stock: 'Orders — Inventory', abc: 'ABC curve', budget: 'Budget vs. Actual', goal: 'Goal thermometer' },
@@ -451,6 +455,20 @@ export const en: Content = {
       variance: 'Variance',
     },
     goal: { title: 'Revenue goal thermometer', goal: 'Monthly goal', achieved: 'Achieved', remaining: 'Remaining', daysLeft: 'business days left', simulate: 'Simulate month progress' },
+    gallery: {
+      title: 'Dashboards in production',
+      note: 'Real screenshots of dashboards I built. Customer names and amounts are blurred.',
+      demoTitle: 'Interactive version (fictitious data)',
+      open: 'Open full-size image',
+      captions: {
+        sales: '#BoraVender — sales order funnel by stage, with urgencies and warnings',
+        stock: 'Sales Orders — Inventory: picking, checking and shipping',
+        tracking: 'Live stock order tracking',
+        goal: 'Revenue goal thermometer (Goal 1 to Ultra Goal)',
+        budget: 'Operations budget — monthly and year-to-date Budget vs. Actual',
+        abc: 'Customer ABC curve — three views',
+      },
+    },
   },
   thesis: {
     title: 'Thesis — Trading algorithm',

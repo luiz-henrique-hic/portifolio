@@ -2,6 +2,7 @@ import type { Content } from './types';
 import { site } from './site';
 
 const yearsAtCpe = new Date().getFullYear() - site.cpeSince;
+const yearsLeading = new Date().getFullYear() - site.leadershipSince;
 
 export const es: Content = {
   meta: {
@@ -62,7 +63,7 @@ export const es: Content = {
       gestor: [
         { value: 7, label: 'áreas bajo gestión' },
         { value: yearsAtCpe, label: 'años en CPE Tecnologia' },
-        { value: 33, label: 'equipos en la competencia de IA' },
+        { value: 70, label: 'personas lideradas' },
       ],
       hic: [
         { value: 100, suffix: '+', label: 'procedures, triggers e informes' },
@@ -176,6 +177,9 @@ export const es: Content = {
         { icon: 'cloud', title: 'CRM Salesforce', desc: 'Implementación y personalización del CRM comercial.' },
         { icon: 'landmark', title: 'Remesas bancarias', desc: 'Automatización del envío y retorno de boletos bancarios.' },
         { icon: 'server', title: 'Virtualización', desc: 'Virtualización de los servidores de la empresa.' },
+        { icon: 'phone', title: 'Vivo Voz Negócio', desc: 'Implementación de la telefonía corporativa en la nube.' },
+        { icon: 'mail', title: 'Google Workspace', desc: 'Correo, agenda y documentos corporativos.' },
+        { icon: 'message', title: 'Discord para empresas', desc: 'Comunicación interna de los equipos.' },
         { icon: 'chart', title: 'Dashboards y BI', desc: 'Paneles para gestión visual.' },
       ],
       impact: 'Sistemas centrales (ERP y CRM) implementados e integrados a la rutina, infraestructura consolidada y procesos financieros automatizados.',
@@ -218,13 +222,13 @@ export const es: Content = {
       { icon: 'clipboard', title: 'Documentar antes de escalar', desc: 'POE, instrucciones de trabajo y flujos mapeados antes de crecer en volumen.' },
     ],
     metricsTitle: 'Métricas de gestión',
-    metricsNote: 'Los valores marcados con "—" aún se completarán.',
+    metricsNote: 'Sistemas implementados: Sankhya W/OM, Salesforce, Vivo Voz Negócio, Google Workspace y Discord para empresas.',
     metrics: [
-      { value: null, label: 'años de liderazgo' }, // TODO
+      { value: yearsLeading, label: 'años de liderazgo (desde 2019)' },
       { value: 7, label: 'áreas bajo gestión' },
-      { value: null, label: 'personas lideradas' }, // TODO
-      { value: null, label: 'sistemas implementados' }, // TODO
-      { value: null, suffix: 'h', label: 'horas ahorradas con automatización' }, // TODO
+      { value: 70, label: 'personas lideradas' },
+      { value: 5, label: 'sistemas implementados' },
+      { value: 10, suffix: 'h+', label: 'ahorradas por actividad con las 5 Skills de IA' },
     ],
   },
   sankhya: {
@@ -422,7 +426,7 @@ export const es: Content = {
   },
   dashboards: {
     title: 'Gestión visual',
-    subtitle: 'Paneles que uso en la operación, recreados como componentes interactivos.',
+    subtitle: 'Paneles que desarrollé y uso en el día a día de la operación.',
     disclaimer: 'Datos ficticios: nombres y valores inventados. La estructura reproduce los paneles reales.',
     client: 'Cliente',
     tabs: { kanban: 'Ciclo del pedido', stock: 'Pedidos — Inventario', abc: 'Curva ABC', budget: 'Presupuestado vs. Real', goal: 'Termómetro de metas' },
@@ -451,6 +455,20 @@ export const es: Content = {
       variance: 'Variación',
     },
     goal: { title: 'Termómetro de metas de facturación', goal: 'Meta del mes', achieved: 'Realizado', remaining: 'Falta', daysLeft: 'días hábiles restantes', simulate: 'Simular avance del mes' },
+    gallery: {
+      title: 'Paneles en producción',
+      note: 'Capturas reales de los paneles que desarrollé. Nombres de clientes y valores fueron difuminados.',
+      demoTitle: 'Versión interactiva (datos ficticios)',
+      open: 'Abrir imagen en tamaño real',
+      captions: {
+        sales: '#BoraVender — embudo de pedidos de venta por fase, con urgencias y alertas',
+        stock: 'Pedidos de Venta — Inventario: preparación, control y expedición',
+        tracking: 'Seguimiento de pedidos de inventario en vivo',
+        goal: 'Termómetro de metas de facturación (Meta 1 a Ultra Meta)',
+        budget: 'Presupuesto de Operaciones — Presupuestado vs. Real mensual y acumulado',
+        abc: 'Curva ABC de clientes — tres vistas',
+      },
+    },
   },
   thesis: {
     title: 'Tesis — Algoritmo de trading',

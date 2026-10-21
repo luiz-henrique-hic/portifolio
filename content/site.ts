@@ -16,6 +16,8 @@ export const site = {
   cv: { pt: false, en: false, es: false },
   // Ano em que entrou na CPE Tecnologia (usado para calcular "anos de casa").
   cpeSince: 2011,
+  // Ano da promoção a Gerente de TI (usado para calcular "anos de liderança").
+  leadershipSince: 2019,
 } as const;
 
 export const isGithubConfigured = !GITHUB_USER.startsWith('SEU_');

@@ -177,6 +177,13 @@ export interface Content {
     abc: { title: string; classA: string; classB: string; classC: string; cumulative: string; revenue: string };
     budget: { title: string; months: string[]; budget: string; actual: string; monthly: string; ytd: string; variance: string };
     goal: { title: string; goal: string; achieved: string; remaining: string; daysLeft: string; simulate: string };
+    gallery: {
+      title: string;
+      note: string;
+      demoTitle: string;
+      open: string;
+      captions: Record<'sales' | 'stock' | 'tracking' | 'goal' | 'budget' | 'abc', string>;
+    };
   };
   thesis: {
     title: string;
