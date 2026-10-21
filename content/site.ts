@@ -1,7 +1,7 @@
 // Dados globais (não traduzidos). Edite aqui.
 
 // TODO: troque pelo seu usuário real do GitHub.
-export const GITHUB_USER = 'luizh-cpe';
+export const GITHUB_USER = 'luiz-henrique-hic';
 
 export const site = {
   name: 'Luiz Henrique',
