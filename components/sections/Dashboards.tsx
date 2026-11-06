@@ -407,10 +407,10 @@ function GoalThermometer() {
   );
 }
 
-// ---------- Galeria de prints reais (desfocados) ----------
+// ---------- Galeria de prints reais ----------
 type ShotKey = 'sales' | 'stock' | 'tracking' | 'goal' | 'budget' | 'abc';
 
-// Imagens em public/dashboards/, geradas a partir de assets/raw/ com nomes e valores desfocados.
+// Imagens em public/dashboards/ (capturas originais dos painéis).
 const SHOTS: { key: ShotKey; file: string; width: number; height: number }[] = [
   { key: 'sales', file: 'vida-do-pedido.webp', width: 1609, height: 815 },
   { key: 'stock', file: 'pedidos-estoque.webp', width: 1619, height: 817 },

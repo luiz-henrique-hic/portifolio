@@ -461,7 +461,7 @@ export const pt: Content = {
     goal: { title: 'Termômetro de metas de faturamento', goal: 'Meta do mês', achieved: 'Realizado', remaining: 'Falta', daysLeft: 'dias úteis restantes', simulate: 'Simular avanço do mês' },
     gallery: {
       title: 'Painéis em produção',
-      note: 'Capturas reais dos painéis que desenvolvi. Nomes de clientes e valores foram desfocados.',
+      note: 'Capturas reais dos painéis que desenvolvi.',
       demoTitle: 'Versão interativa (dados fictícios)',
       open: 'Abrir imagem em tamanho real',
       captions: {

@@ -457,7 +457,7 @@ export const es: Content = {
     goal: { title: 'Termómetro de metas de facturación', goal: 'Meta del mes', achieved: 'Realizado', remaining: 'Falta', daysLeft: 'días hábiles restantes', simulate: 'Simular avance del mes' },
     gallery: {
       title: 'Paneles en producción',
-      note: 'Capturas reales de los paneles que desarrollé. Nombres de clientes y valores fueron difuminados.',
+      note: 'Capturas reales de los paneles que desarrollé.',
       demoTitle: 'Versión interactiva (datos ficticios)',
       open: 'Abrir imagen en tamaño real',
       captions: {

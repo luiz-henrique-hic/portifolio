@@ -457,7 +457,7 @@ export const en: Content = {
     goal: { title: 'Revenue goal thermometer', goal: 'Monthly goal', achieved: 'Achieved', remaining: 'Remaining', daysLeft: 'business days left', simulate: 'Simulate month progress' },
     gallery: {
       title: 'Dashboards in production',
-      note: 'Real screenshots of dashboards I built. Customer names and amounts are blurred.',
+      note: 'Real screenshots of dashboards I built.',
       demoTitle: 'Interactive version (fictitious data)',
       open: 'Open full-size image',
       captions: {

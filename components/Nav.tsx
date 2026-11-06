@@ -24,7 +24,21 @@ export const SECTION_FOCUS: Partial<Record<SectionId, Mode>> = {
   stack: 'hic',
 };
 
-function useActiveSection(): SectionId {
+/** Seções ocultadas em cada modo (o modo oposto ao da seção). Seções ausentes aparecem sempre. */
+export const SECTION_HIDDEN_IN: Partial<Record<SectionId, Mode>> = {
+  management: 'hic',
+  sankhya: 'gestor',
+  salesforce: 'gestor',
+  thesis: 'gestor',
+  infra: 'gestor',
+  stack: 'gestor',
+};
+
+export function isSectionVisible(id: SectionId, mode: Mode): boolean {
+  return SECTION_HIDDEN_IN[id] !== mode;
+}
+
+function useActiveSection(mode: Mode): SectionId {
   const [active, setActive] = useState<SectionId>('hero');
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,7 +53,7 @@ function useActiveSection(): SectionId {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [mode]);
   return active;
 }
 
@@ -124,11 +138,11 @@ function ThemeToggle() {
 
 export function Nav() {
   const { t, mode } = useSite();
-  const active = useActiveSection();
+  const active = useActiveSection(mode);
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
-  const links = SECTION_ORDER.filter((id) => id !== 'hero');
+  const links = SECTION_ORDER.filter((id) => id !== 'hero' && isSectionVisible(id, mode));
 
   useEffect(() => {
     if (!open) return;
